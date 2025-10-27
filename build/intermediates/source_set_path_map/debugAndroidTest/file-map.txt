@@ -1,0 +1,5 @@
+com.halata.blueapp.test.app-core-1.6.1-0 /Users/alirezasalehi/.gradle/caches/transforms-3/43d69984aa7243912c8cd27618396e30/transformed/core-1.6.1/res
+com.halata.blueapp.test.app-androidTest-1 /Users/alirezasalehi/AndroidStudioProjects/BlueApp/app/build/generated/res/resValues/androidTest/debug
+com.halata.blueapp.test.app-mergeDebugAndroidTestResources-2 /Users/alirezasalehi/AndroidStudioProjects/BlueApp/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+com.halata.blueapp.test.app-mergeDebugAndroidTestResources-3 /Users/alirezasalehi/AndroidStudioProjects/BlueApp/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+com.halata.blueapp.test.app-merged_res-4 /Users/alirezasalehi/AndroidStudioProjects/BlueApp/app/build/intermediates/merged_res/debugAndroidTest
