@@ -24,6 +24,7 @@ public class LogViewModel extends ViewModel {
     private MutableLiveData<List<String>> text = new MutableLiveData<>(new ArrayList<>());
     private MutableLiveData<BluetoothAdapter> bluetoothAdapter = new MutableLiveData<>();
     private MutableLiveData<List<Byte>> receivedBluetoothBuffer = new MutableLiveData<>(new ArrayList<>());
+    private MutableLiveData<Boolean> isBluetoothConnected = new MutableLiveData<>();
     private BluetoothSocket socket;
     private boolean threadStarted;
     private OutputStream outputStream;
@@ -40,9 +41,10 @@ public class LogViewModel extends ViewModel {
         return text;
     }
 
+    public LiveData<Boolean> getConnectedStatus(){
+        return isBluetoothConnected;
+    }
     public boolean connectToBluetoothDevice(Context context) {
-        if(socket.isConnected())
-            return true;
         try {
             BasicSetting readSettingFromFile = SettingsHelper.loadFromFile(context, "settings.json");
             if (readSettingFromFile != null) {
@@ -56,13 +58,15 @@ public class LogViewModel extends ViewModel {
                 socket.connect();
                 outputStream = socket.getOutputStream();
                 inputStream = socket.getInputStream();
+
+                isBluetoothConnected.setValue(true);
                 return true;
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Log.e("HaLTA", "Connect to Defined MAC Address was not successful");
         }
 
-        return true;
+        return false;
     }
 
     public boolean sendToBluetooth(String data){
@@ -93,6 +97,8 @@ public class LogViewModel extends ViewModel {
                     int bytes;
 
                     bytes = inputStream.read(buffer);
+                    if(bytes == -1)
+                        continue;
                     for (int i=0; i< bytes; i++)
                         receivedBluetoothBuffer.getValue().add(buffer[i]);
                     String incomingData = new String(buffer, 0, bytes);

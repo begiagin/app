@@ -33,13 +33,15 @@ public class HomeFragment extends Fragment {
         logvm = new ViewModelProvider(requireActivity()).get(LogViewModel.class);
 
         logvm.connectToBluetoothDevice(view.getContext());
-        logvm.startReadThread();
+        btnSendToBluetooth = (Button) view.findViewById(R.id.btnSendToBluetooth);
+        if(Boolean.TRUE.equals(logvm.getConnectedStatus().getValue())) {
+            logvm.startReadThread();
 
-        btnSendToBluetooth.setOnClickListener(event -> {
-            Restore halataConfig = new Restore(view.getContext());
-            halataConfig.setOutputStream(logvm.getOutputStream());
-            halataConfig.SendEX(0x62,Float.floatToIntBits(0.2f),false,"RAM");
-        });
-
+            btnSendToBluetooth.setOnClickListener(event -> {
+                Restore halataConfig = new Restore(view.getContext());
+                halataConfig.setOutputStream(logvm.getOutputStream());
+                halataConfig.SendEX(0x62, Float.floatToIntBits(0.2f), false, "RAM");
+            });
+        }
     }
 }
