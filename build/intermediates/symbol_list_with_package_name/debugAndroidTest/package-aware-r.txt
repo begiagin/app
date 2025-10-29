@@ -1,3 +1,0 @@
-com.halata.blueapp.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme
