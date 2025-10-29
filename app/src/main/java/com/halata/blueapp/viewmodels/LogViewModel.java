@@ -64,6 +64,7 @@ public class LogViewModel extends ViewModel {
             }
         } catch (IOException e) {
             Log.e("HaLTA", "Connect to Defined MAC Address was not successful");
+            return false;
         }
 
         return false;

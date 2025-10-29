@@ -1,11 +1,14 @@
 package com.halata.blueapp.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -18,6 +21,7 @@ public class HomeFragment extends Fragment {
 
     private LogViewModel logvm;
     private Button btnSendToBluetooth;
+    private TextView tvAlert;
     private View rootView;
     public HomeFragment(){
         super(R.layout.home_fragment);
@@ -31,17 +35,22 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         logvm = new ViewModelProvider(requireActivity()).get(LogViewModel.class);
-
+        tvAlert = (TextView)view.findViewById(R.id.tvAlert);
         logvm.connectToBluetoothDevice(view.getContext());
         btnSendToBluetooth = (Button) view.findViewById(R.id.btnSendToBluetooth);
         if(Boolean.TRUE.equals(logvm.getConnectedStatus().getValue())) {
             logvm.startReadThread();
 
+            tvAlert.setTextColor(Color.parseColor("#4CAF50"));
+            tvAlert.setText("اتصال برقرار است \uD83D\uDC9A");
             btnSendToBluetooth.setOnClickListener(event -> {
                 Restore halataConfig = new Restore(view.getContext());
                 halataConfig.setOutputStream(logvm.getOutputStream());
                 halataConfig.SendEX(0x62, Float.floatToIntBits(0.2f), false, "RAM");
             });
+        }else {
+            tvAlert.setTextColor(Color.parseColor("#FF1744"));
+            tvAlert.setText("اتصال به دستگاه ممکن نیست \uD83D\uDFE0");
         }
     }
 }
