@@ -1,0 +1,82 @@
+# =========================
+# Android Studio / Gradle
+# =========================
+
+# Build folders
+/build/
+*/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Gradle files
+.gradle/
+local.properties
+
+# Log files
+*.log
+
+# Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+# Keystore files
+*.jks
+*.keystore
+
+# Sign-in and credentials
+signing.properties
+google-services.json
+app/google-services.json
+app/release/output-metadata.json
+
+# IntelliJ
+out/
+
+# NDK
+obj/
+
+# Generated files
+gen/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Translations
+*.pot
+
+# Unit test and UI test reports
+test-results/
+outputs/
+
+# Misc
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+
+# Android specific cache
+.cache/
+gradle-app.setting
+
+# Firebase Crashlytics
+crashlytics-build.properties
+fabric.properties
+
+# Navigation Editor temp files
+.navigation/
+
+# Android Studio profiler
+*.hprof
+
+# VS Code (if you use it)
+.vscode/
+
+# Kotlin build caches
+.kotlinc/
+
+# Lint reports
+lint/reports/
+lint/intermediates/
