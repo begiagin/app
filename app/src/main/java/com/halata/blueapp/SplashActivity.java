@@ -25,8 +25,8 @@ public class SplashActivity extends AppCompatActivity {
         int width  = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
 
-        svMain = findViewById(R.id.scView);
-        svMain.setMinimumHeight(height - 1);
+        //svMain = findViewById(R.id.scView);
+        //svMain.setMinimumHeight(height - 1);
 
         int[] colors = {0xFFFF0550, 0xFF0110FF}; // Red to Blue
         GradientDrawable gd = new GradientDrawable(
@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
 
-        svMain.setBackground(gd);
+        //svMain.setBackground(gd);
 
 
         // Use a Handler to post a delayed action for transitioning to the main activity

@@ -5,28 +5,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+<!--    <ScrollView-->
+<!--        android:id="@+id/scView"-->
+<!--        android:layout_width="match_parent"-->
 
-        android:id="@+id/scView">
+<!--        android:layout_height="wrap_content">-->
 
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:gravity="center"-->
-<!--            android:textSize="40dp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:text="پولادنگاروید نسخه ۱.۲.۰۱"/>-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="35pt"
+                    android:textSize="40dp"
+                    android:textColor="@color/black"
+                    android:text="پولادنگاروید نسخه ۱.۲.۰۱"/>
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:lottie_autoPlay="true"
             app:lottie_fileName="laser.json"
-            app:lottie_loop="true"
-            />
-    </ScrollView>
+            app:lottie_loop="true" />
+        <!--    </ScrollView>-->
 
 </RelativeLayout>
