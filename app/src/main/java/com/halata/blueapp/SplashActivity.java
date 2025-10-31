@@ -22,7 +22,8 @@ public class SplashActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        int width  = displayMetrics.widthPixels;
+        int width  =
+                displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
 
         //svMain = findViewById(R.id.scView);

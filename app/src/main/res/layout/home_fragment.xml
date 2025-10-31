@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layoutDirection="rtl"
+
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -23,23 +24,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#A01D5A01"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:text="تمامی هشدارها در حالت نرمال هستند"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btnCheckBluetooth"
-                android:layout_width="50dp"
+                android:layout_width="60dp"
                 android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="💚"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
 
+                android:text="💚"
+                android:layout_gravity="center_vertical"/>
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -20,11 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+
 public class LogViewModel extends ViewModel {
     private MutableLiveData<List<String>> text = new MutableLiveData<>(new ArrayList<>());
     private MutableLiveData<BluetoothAdapter> bluetoothAdapter = new MutableLiveData<>();
     private MutableLiveData<List<Byte>> receivedBluetoothBuffer = new MutableLiveData<>(new ArrayList<>());
-    private MutableLiveData<Boolean> isBluetoothConnected = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isBluetoothConnected = new MutableLiveData<>(false);
     private BluetoothSocket socket;
     private boolean threadStarted;
     private OutputStream outputStream;
@@ -70,13 +71,57 @@ public class LogViewModel extends ViewModel {
         return false;
     }
 
-    public boolean sendToBluetooth(String data){
+    public void sendToBluetooth(String data){
         try {
             outputStream.write(data.getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return true;
+
+    }
+
+    public boolean refreshBluetoothConnectivity(Context context){
+        if(isBluetoothConnected.getValue()){
+            try {
+
+                isBluetoothConnected.setValue(false);
+                if(outputStream != null) outputStream.close();
+                if(inputStream != null) inputStream.close();
+
+                if(socket != null){
+                    socket.close();
+                    socket = null;
+                }
+                bluetoothAdapter.setValue(null);
+                return false;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            try {
+                BasicSetting readSettingFromFile = SettingsHelper.loadFromFile(context, "settings.json");
+                if (readSettingFromFile != null) {
+                    String bluetoothMAC = readSettingFromFile.getBluetoothMACAddress();
+
+
+                    bluetoothAdapter.setValue(BluetoothAdapter.getDefaultAdapter());
+                    BluetoothDevice device = bluetoothAdapter.getValue().getRemoteDevice(bluetoothMAC);
+
+                    socket = device.createRfcommSocketToServiceRecord(HC05_UUID);
+                    socket.connect();
+                    outputStream = socket.getOutputStream();
+                    inputStream = socket.getInputStream();
+
+                    isBluetoothConnected.setValue(true);
+                    return false;
+
+                }
+            } catch (IOException e) {
+                Log.e("HaLTA", "Connect to Defined MAC Address was not successful");
+
+            }
+        }
+        return false;
     }
 
     public  OutputStream getOutputStream(){
@@ -94,24 +139,27 @@ public class LogViewModel extends ViewModel {
         new Thread(() -> {
             while (true) {
                 try {
-                    byte[] buffer = new byte[64];
-                    int bytes;
+                    if (isBluetoothConnected.getValue()) {
+                        byte[] buffer = new byte[64];
+                        int bytes;
 
-                    bytes = inputStream.read(buffer);
-                    if(bytes == -1)
-                        continue;
-                    for (int i=0; i< bytes; i++)
-                        receivedBluetoothBuffer.getValue().add(buffer[i]);
-                    String incomingData = new String(buffer, 0, bytes);
-                    text.getValue().add("Received : " + incomingData);
+                        bytes = inputStream.read(buffer);
+                        if (bytes == -1)
+                            continue;
+                        for (int i = 0; i < bytes; i++)
+                            receivedBluetoothBuffer.getValue().add(buffer[i]);
+                        String incomingData = new String(buffer, 0, bytes);
+                        text.getValue().add("Received : " + incomingData);
 
-                    threadStarted = true;
+                        threadStarted = true;
+                    }
                 } catch (IOException e) {
                     Log.e("BT_ERROR", "Disconnected / Error reading");
                     threadStarted = false;
                     break;
                 }
             }
+
         }).start();
 
     }
