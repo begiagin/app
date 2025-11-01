@@ -40,6 +40,24 @@ public class BasicSetting {
     @SerializedName("gotoHardwareZero")
     private boolean gotoHardwareZero;
 
+    public float getxCoffiecintAxis() {
+        return xCoffiecintAxis;
+    }
+
+    public void setxCoffiecintAxis(float xCoffiecintAxis) {
+        this.xCoffiecintAxis = xCoffiecintAxis;
+    }
+
+    public boolean isSendExtraHeader() {
+        return sendExtraHeader;
+    }
+
+    public void setSendExtraHeader(boolean sendExtraHeader) {
+        this.sendExtraHeader = sendExtraHeader;
+    }
+
+    @SerializedName("sendExtraHeader")
+    private boolean sendExtraHeader;
 
     public String getBluetoothMACAddress() {
         return bluetoothMACAddress;
@@ -195,6 +213,7 @@ public class BasicSetting {
                 ", hitPower=" + hitPower +
                 ", penFrequency=" + penFrequency +
                 ", gotoHardwareZero=" + gotoHardwareZero +
+                ", sendExtraHeader=" + sendExtraHeader +
                 '}';
     }
 }

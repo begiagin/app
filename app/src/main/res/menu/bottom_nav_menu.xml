@@ -10,6 +10,6 @@
 
     <item android:id="@+id/mnu_upload"
           android:icon="@drawable/baseline_cloud_upload_24"
-          android:title="بارگذاری نسخه" />
+          android:title="رویداد ها" />
 
 </menu>

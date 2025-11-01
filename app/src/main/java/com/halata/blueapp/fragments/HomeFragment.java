@@ -61,20 +61,14 @@ public class HomeFragment extends Fragment {
         btnCheckBluetoothConnectivity.setOnClickListener(event -> {
 
             if(logvm.refreshBluetoothConnectivity(view.getContext())){
-
-            }
-
-            if(logvm.getConnectedStatus().getValue()){
-                logvm.refreshBluetoothConnectivity(view.getContext());
+                tvAlert.setText("اتصال برقرار است \uD83D\uDC9A");
+                tvAlert.setTextColor(Color.parseColor("#4CAF50"));
+                btnCheckBluetoothConnectivity.setText("\uD83D\uDFE0");
+                logvm.startReadThread();
+            }else{
                 tvAlert.setTextColor(Color.parseColor("#FF1744"));
                 btnCheckBluetoothConnectivity.setText("\uD83D\uDC9A");
                 tvAlert.setText("اتصال به دستگاه برقرار نیست \uD83D\uDFE0");
-            }else {
-                logvm.refreshBluetoothConnectivity(view.getContext());
-                tvAlert.setTextColor(Color.parseColor("#4CAF50"));
-                tvAlert.setText("اتصال برقرار است \uD83D\uDC9A");
-                btnCheckBluetoothConnectivity.setText("\uD83D\uDFE0");
-                logvm.startReadThread();
             }
         });
     }

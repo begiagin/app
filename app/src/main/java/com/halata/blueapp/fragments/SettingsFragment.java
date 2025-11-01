@@ -87,6 +87,7 @@ public class SettingsFragment extends Fragment {
         //0 - 255 : 0
         EditText txtPenFrequency = (EditText)rootView.findViewById(R.id.txtPenFrequency);
         CheckBox cbGotoZeroHardware = (CheckBox)rootView.findViewById(R.id.cbGotoZeroHardware);
+        CheckBox cbSendExtraData = (CheckBox)rootView.findViewById(R.id.cbSendExtraData);
         Spinner  spBluetoothMAC = (Spinner)rootView.findViewById(R.id.spinner) ;
 
         if(readSettingFromFile != null) {
@@ -108,7 +109,7 @@ public class SettingsFragment extends Fragment {
             txtHitPower.setText(String.valueOf(readSettingFromFile.getHitPower()));
             txtPenFrequency.setText(String.valueOf(readSettingFromFile.getPenFrequency()));
             cbGotoZeroHardware.setChecked(readSettingFromFile.isGotoHardwareZero());
-
+            cbSendExtraData.setChecked(readSettingFromFile.isSendExtraHeader());
 
             ArrayAdapter<String> adapter = (ArrayAdapter<String>) spBluetoothMAC.getAdapter();
             int foundIndex = -1;
@@ -174,7 +175,7 @@ public class SettingsFragment extends Fragment {
                 s.setHitPower(Integer.parseInt(String.valueOf(txtHitPower.getText())));
                 s.setPenFrequency(Integer.parseInt(String.valueOf(txtPenFrequency.getText())));
                 s.setGotoHardwareZero(Boolean.parseBoolean(String.valueOf(cbGotoZeroHardware.isChecked())));
-
+                s.setSendExtraHeader(Boolean.parseBoolean(String.valueOf(cbSendExtraData.isChecked())));
 
 
 

@@ -1,17 +1,10 @@
 package com.halata.blueapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
-
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.halata.blueapp.adapters.ViewPagerAdapter;
-import com.halata.blueapp.viewmodels.LogViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager;
