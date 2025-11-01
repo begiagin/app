@@ -36,4 +36,82 @@ public class RestoreConfig {
     public static final byte OPERATE = 0x22;
 
     public static byte EOF_Char = (byte) '=';
+    /*
+      void sendStartCommand() {
+    Uint8List listOfData = Uint8List.fromList([0x06, 0x20, 0x00, 0x24, 0x04]);
+    if (_isConnected) {
+      _connection?.output.add(listOfData);
+    }
+  }
+
+  void sendStopCommand() async {
+    Uint8List listOfData = Uint8List.fromList([0x06, 0x20, 0x00, 0x24, 0x01]);
+    if (_isConnected) {
+      _connection?.output.add(listOfData);
+    }
+  }
+
+  void sendUpCommand() async {
+    Uint8List listOfData = Uint8List.fromList([0x06, 0x20, 0x00, 0x24, 0x02]);
+    if (_isConnected) {
+      _connection?.output.add(listOfData);
+    }
+  }
+
+  void sendDownCommand() async {
+    Uint8List listOfData = Uint8List.fromList([0x06, 0x20, 0x00, 0x24, 0x08]);
+    if (_isConnected) {
+      _connection?.output.add(listOfData);
+    }
+  }
+
+  void sendPenCnommand() async {
+    Uint8List listOfData = Uint8List.fromList([0x06, 0x28, 0x00, 0x22, 0x00]);
+    if (_isConnected) {
+      _connection?.output.add(listOfData);
+    }
+  }
+
+  void sendSetCnommand() async {
+    Uint8List listOfData = Uint8List.fromList([0x06, 0x20, 0x00, 0x24, 0x80]);
+    if (_isConnected) {
+      _connection?.output.add(listOfData);
+    }
+  }
+
+  Future<bool> readPenStatus() async {
+    Uint8List listOfData = Uint8List.fromList([0x06, 0x28, 0x00, 0x22, 0x00]);
+    if (_isConnected) {
+      _connection?.output.add(listOfData);
+    }
+    var test = _connection?.input;
+    logger.d(test);
+    return false;
+  }
+
+  void sendBarcodeContent(String barcode) async {
+    String tempBarcode = barcode; //+ "\r";
+
+    List<int> list = utf8.encode(tempBarcode);
+    Uint8List bytes = Uint8List.fromList(list);
+
+    if (_isConnected) {
+      _connection?.output.add(bytes);
+    }
+
+    Uint8List readMarkerRAM() {
+      Uint8List RAM_MEMORY = Uint8List(256);
+      return RAM_MEMORY;
+    }
+
+    Uint8List readFALCK_MEM() {
+      Uint8List FLACK_MEM = Uint8List(0x10000);
+      return FLACK_MEM;
+    }
+
+    Uint8List readFALASH_MEM() {
+      Uint8List FLASH_MEM = Uint8List(0x20000);
+      return FLASH_MEM;
+    }
+     */
 }
