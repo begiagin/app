@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.halata.blueapp.R;
 import com.halata.blueapp.data.models.BasicSetting;
 import com.halata.blueapp.utils.InputValidator;
+import com.halata.blueapp.utils.Restore;
 import com.halata.blueapp.utils.SettingsHelper;
 import com.halata.blueapp.utils.ValidationResult;
 import com.halata.blueapp.viewmodels.LogViewModel;
@@ -123,6 +124,7 @@ public class SettingsFragment extends Fragment {
 
             if(foundIndex != -1)
                 spBluetoothMAC.setSelection(foundIndex);
+
         }
 
         Button btnSave = (Button) rootView.findViewById(R.id.btnSave);
@@ -209,6 +211,17 @@ public class SettingsFragment extends Fragment {
                 if (result.isValid()) {
                     SettingsHelper.saveToFile(getView().getContext(), s, "settings.json", logvm);
                     SettingsHelper.SaveSettings(getView().getContext(), s);
+
+                    boolean connectionStat = false;
+                    connectionStat = Boolean.TRUE.equals(logvm.getConnectedStatus().getValue());
+
+                    if(connectionStat){
+
+                        Restore halataConfig = new Restore(view.getContext());
+                        halataConfig.setOutputStream(logvm.getOutputStream());
+                        halataConfig.SendEX(0x24,s.getRightCounter(),false,"RAM"); //
+                    }
+
                     Toast.makeText(getView().getContext(), "ذخیره جزییات انجام شد  ✅", Toast.LENGTH_SHORT).show();
                     logvm.setText("saved setting");
                 } else {
