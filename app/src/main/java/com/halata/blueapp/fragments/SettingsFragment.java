@@ -219,7 +219,96 @@ public class SettingsFragment extends Fragment {
 
                         Restore halataConfig = new Restore(view.getContext());
                         halataConfig.setOutputStream(logvm.getOutputStream());
-                        halataConfig.SendEX(0x24,s.getRightCounter(),false,"RAM"); //
+                        //halataConfig.SendEX(0x24,s.getRightCounter(),false,"RAM"); //
+                        String MotorsIntCof = "1";
+                        String MinMotortime = "1";
+                        String Config1 = String.valueOf(0x80);
+                        String Config2 = String.valueOf(0x21);
+                        String PenDelay = String.valueOf(0x4);
+                        String DefaultMode = String.valueOf(0x20);
+                        String MotorXHalfDelay = String.valueOf(0x20);
+                        String MotorYHalfDelay  = String.valueOf(0x20);
+                        String MotorXextent = String.valueOf(0x2000);
+                        String MotorYextent = String.valueOf(0x2000);
+                        String Pen_Duty_On = String.valueOf(0x0);
+                        String Pen_Duty_Off = String.valueOf(0x0);
+                        String characterSpace = String.valueOf(0x8);
+                        String[] SendToDevice =
+                                {
+                                        "40",MotorsIntCof,                            "false","RAM",           //MotorsIntCof
+                                        "10",MotorsIntCof,                            "false","FLACK",         //MotorsIntCof_FLACK
+                                        "41",MinMotortime,                            "false","RAM",           //MinMotortime
+                                        "11",MinMotortime,                            "false","FLACK",         //MinMotortime_FLACK
+                                        "2E",Config1,                                 "false","RAM",           //Config1
+                                        "30",Config1,                                 "false","FLACK",         //Config1_FLACK
+                                        "2F",Config2,                                 "false","RAM",           //Config2
+                                        "31",Config2,                                 "false","FLACK",         //Config2_FLACK
+                                        "62",PenDelay,                                "false","RAM",           //PenDelay
+                                        "32",PenDelay,                                "false","FLACK",         //PenDelay_FLACK
+                                        "63",DefaultMode,                             "false","RAM",           //DefaultMode
+                                        "33",DefaultMode,                             "false","FLACK",         //DefaultMode_FLACK
+                                        "64",MotorXHalfDelay,                         "false","RAM",           //MotorXHalf
+                                        "34",MotorXHalfDelay,                         "false","FLACK",         //MotorXHalf_FLACK
+                                        "65",MotorYHalfDelay,                         "false","RAM",           //MotorXHalf
+                                        "35",MotorYHalfDelay,                         "false","FLACK",         //MotorXHalf_FLACK
+
+                                        "66",String.valueOf((Integer.parseInt(MotorXextent) & 0xFF)),                   "false","RAM",           //MotorXHalf
+                                        "36",String.valueOf((Integer.parseInt(MotorXextent) & 0xFF)),                   "false","FLACK",         //MotorXHalf_FLACK
+                                        "67",String.valueOf((Integer.parseInt(MotorXextent) / 0x100)),                  "false","RAM",           //MotorXHalf
+                                        "37",String.valueOf((Integer.parseInt(MotorXextent) / 0x100)),                  "false","FLACK",         //MotorXHalf_FLACK
+                                        "68",String.valueOf((Integer.parseInt(MotorYextent) & 0xFF)),                   "false","RAM",           //MotorXHalf
+                                        "38",String.valueOf((Integer.parseInt(MotorYextent) & 0xFF)),                   "false","FLACK",         //MotorXHalf_FLACK
+                                        "69",String.valueOf((Integer.parseInt(MotorYextent) / 0x100)),                  "false","RAM",           //MotorXHalf
+                                        "39",String.valueOf((Integer.parseInt(MotorYextent) / 0x100)),                  "false","FLACK",         //MotorXHalf_FLACK
+
+                                        "5D",String.valueOf(s.getMarkSpeed()),                           "false","RAM",           //SERNO_PDSPEED
+                                        "2D",String.valueOf(s.getMarkSpeed()),                           "false","FLACK",         //SERNO_PDTIME_FLACK
+
+                                        "6A",String.valueOf(Float.floatToIntBits(s.getxCofficeintAxis())),                             "false","RAM",           //SCALEX
+                                        "3C",String.valueOf(Float.floatToIntBits(s.getxCofficeintAxis())),                             "false","FLACK",         //SERNO_XSIZE_FLACK
+                                        "6B",String.valueOf(Float.floatToIntBits(s.getyConfficeintAxis())),                             "false", "RAM",          //SCALEY
+                                        "3D",String.valueOf(Float.floatToIntBits(s.getyConfficeintAxis())),                             "false", "FLACK",        //SERNO_YSIZE_FLACK
+                                        "40",String.valueOf(s.getStartMarkX() & 0XFF),              "false", "FLACK",        //SERNO_X0_FLACK
+                                        "41",String.valueOf(s.getStartMarkX() / 0x100),                  "false", "FLACK",        //SERNO_X1_FLACK
+                                        "42",String.valueOf(s.getStartMarkY() & 0XFF),              "false", "FLACK",        //SERNO_Y0_FLACK
+                                        "43",String.valueOf(s.getStartMarkY() / 0x100),                  "false", "FLACK",        //SERNO_Y1_FLACK
+                                        "50",String.valueOf(s.getNextLineX()& 0XFF),            "false", "FLACK",        //NEXT_LINEX0_FLACK
+                                        "51",String.valueOf(s.getNextLineX() / 0x100),                "false", "FLACK",        //NEXT_LINEX1_FLACK
+                                        "52",String.valueOf(s.getNextLineY() & 0XFF),            "false", "FLACK",        //NEXT_LINEY0_FLACK
+                                        "53",String.valueOf(s.getNextLineY() / 0x100),                "false", "FLACK",        //NEXT_LINEY1_FLACK
+                                        "28",String.valueOf(s.getRightCounter()),                             "false", "FLACK",        //SERNO_LSB_FLACK
+                                        "29",String.valueOf(s.getLeftCounter()),                             "false", "FLACK",        //SERNO_MSB_FLACK
+                                        "58",String.valueOf(s.getRightCounter()),                             "false", "RAM",        //SERNO_LSB_FLACK
+                                        "59",String.valueOf(s.getLeftCounter()),                             "false", "RAM",        //SERNO_MSB_FLACK
+                                        "44",characterSpace,                            "false", "FLACK",        //serno space
+//                                        "45",((byte)(1)),                                                "false", "FLACK",        //serno rate
+//                                        "46",((byte)(0)),                                                "false", "FLACK",        //serno end
+                                        "47",String.valueOf((Float.floatToIntBits(s.getDelayBeforeMark() * 10))),                       "false", "FLACK",        //SERNO_DELAY_FLACK
+                                        "55",Pen_Duty_On,                            "false", "RAM",          //Pen_Duty_On
+                                        "25",Pen_Duty_On,                            "false", "FLACK",        //Pen_Duty_On
+                                        "56",Pen_Duty_Off,                           "false", "RAM",          //Pen_Duty_Off
+                                        "26",Pen_Duty_Off,                           "false", "FLACK",        //Pen_Duty_Off
+                                        "5A",String.valueOf((Float.floatToIntBits(s.getPointsDistances())) & 0XFF),                        "false", "RAM",          //DotSpace
+                                        "2A",String.valueOf((Float.floatToIntBits(s.getPointsDistances())) & 0XFF),                        "false", "FLACK",        //DotSpace
+                                        "5B",String.valueOf((Float.floatToIntBits(s.getPointsDistances()))/0x100),                         "false", "RAM",          //DotSpace
+                                        "2B",String.valueOf((Float.floatToIntBits(s.getPointsDistances()))/0x100),                         "false", "FLACK",        //DotSpace
+                                        "5E",String.valueOf(Float.floatToIntBits(s.getDelayAfterMark() *10) & 0XFF),            "false", "RAM",          //AUTO_TIMEth
+                                        "2E",String.valueOf(Float.floatToIntBits(s.getDelayAfterMark() *10) & 0XFF),            "false", "FLACK",        //AUTO_TIMEth_FLACK
+                                        "5F",String.valueOf(Float.floatToIntBits(s.getDelayAfterMark() *10)/0x100),             "false", "RAM",          //AUTO_TIME
+                                        "2F",String.valueOf(Float.floatToIntBits(s.getDelayAfterMark() *10)/0x100),             "false", "FLACK",        //AUTO_TIME_FLACK
+                                        "26",String.valueOf((byte)(0)),                                                 "true", "RAM",          //PEN_SERVER
+                                };
+
+                        for (int k = 0; k < SendToDevice.length; k = k + 4) {
+                            int adrs = Byte.valueOf(SendToDevice[k], 16);
+                            int dt = Byte.valueOf(SendToDevice[k + 1], 16);
+                            boolean rd = Boolean.valueOf(SendToDevice[k + 2]);
+                            String mm = SendToDevice[k + 3];
+
+                            halataConfig.SendEX(adrs, dt, rd, mm);
+                            Thread.sleep(10);
+
+                        }
                     }
 
                     Toast.makeText(getView().getContext(), "ذخیره جزییات انجام شد  ✅", Toast.LENGTH_SHORT).show();
