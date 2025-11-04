@@ -23,7 +23,7 @@ public class Restore {
     public void setOutputStream(OutputStream outputStream) {
         this.btOutputStream = outputStream;
     }
-
+    public OutputStream getBtOutputStream(){return this.btOutputStream;}
     public void SendEX(int Address, int Data, boolean IsRead, String Memory) {
 
         try {

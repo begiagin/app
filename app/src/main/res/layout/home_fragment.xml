@@ -49,6 +49,7 @@
                 android:layout_weight="1"
                 android:hint="بارکد جهت حک شدن را پارد نمایید"
                 android:imeOptions="actionDone"
+                android:id="@+id/txtBarcode"
                 android:lines="1"
                 android:maxLines="1" />
         </LinearLayout>
@@ -87,6 +88,7 @@
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="8dp"
                 android:text="شروع حک"
+                android:id="@+id/btnStartMark"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
         </LinearLayout>

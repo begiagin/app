@@ -81,7 +81,7 @@ public class LogViewModel extends ViewModel {
     }
 
     public boolean refreshBluetoothConnectivity(Context context){
-        if(isBluetoothConnected.getValue()){
+        if(Boolean.TRUE.equals(isBluetoothConnected.getValue())){
             try {
 
                 isBluetoothConnected.setValue(false);
