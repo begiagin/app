@@ -75,6 +75,7 @@ public class Restore {
             }
 
         } catch (IOException ex) {
+
             Log.e(TAG, "SendEX failed: " + ex.getMessage());
             Toast.makeText(context, "SendEX failed:\n" + ex, Toast.LENGTH_LONG).show();
         }
