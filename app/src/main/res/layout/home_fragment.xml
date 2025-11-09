@@ -52,6 +52,12 @@
                 android:id="@+id/txtBarcode"
                 android:lines="1"
                 android:maxLines="1" />
+            <Button
+                android:id="@+id/btnNewLine"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:text="👇"
+                android:layout_gravity="center_vertical"/>
         </LinearLayout>
 
         <LinearLayout
@@ -64,14 +70,17 @@
                 android:id="@+id/btnSendToBluetooth"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="ارسال به بلوتوث" />
 
             <Button
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:text="سطر بعد" />
+                android:layout_width="70dp"
+                android:id="@+id/btnPenStat"
+                android:layout_height="70dp"
+                android:textSize="30dp"
+                android:layout_marginTop="6dp"
+                android:text="🖌️" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

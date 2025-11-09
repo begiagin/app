@@ -72,7 +72,7 @@ public class SettingsHelper {
         try (FileReader reader = new FileReader(file)) {
             Gson gson = new Gson();
             BasicSetting tempSetting = gson.fromJson(reader, BasicSetting.class);
-
+            SaveSettings(context, tempSetting);
             return tempSetting;
         } catch (IOException e) {
             Toast.makeText(context,"load Setting file failed .", Toast.LENGTH_LONG).show();

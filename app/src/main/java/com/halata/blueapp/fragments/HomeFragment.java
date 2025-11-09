@@ -16,7 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.halata.blueapp.R;
+import com.halata.blueapp.data.models.BasicSetting;
 import com.halata.blueapp.utils.Restore;
+import com.halata.blueapp.utils.SettingsHelper;
 import com.halata.blueapp.viewmodels.LogViewModel;
 
 import java.io.IOException;
@@ -101,9 +103,18 @@ public class HomeFragment extends Fragment {
                 Restore halataConfig = new Restore(view.getContext());
                 halataConfig.setOutputStream(logvm.getOutputStream());
                 EditText txtBarcode = (EditText)view.findViewById(R.id.txtBarcode);
+
+
+
                 if(txtBarcode.getText().length() > 0){
                     byte[] dataToSend = txtBarcode.getText().toString().getBytes();
                     try {
+                        BasicSetting setting = SettingsHelper.LoadSettings(view.getContext());
+                        if(setting != null)
+                            if(setting.isSendExtraHeader()){
+                                Restore restore = new Restore(view.getContext());
+                                restore.SendEX(0x10,0x0, false, "RAM");
+                            }
                         logvm.getOutputStream().write(dataToSend);
                         logvm.setText("Send data to bluetooth : " + txtBarcode.getText().toString());
                     } catch (IOException e) {
